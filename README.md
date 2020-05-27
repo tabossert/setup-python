@@ -113,11 +113,11 @@ Check out our detailed guide on using [Python with GitHub Actions](https://help.
 
 GitHub hosted runners have a tools cache that comes with a few versions of Python + PyPy already installed. This tools cache helps speed up runs and tool setup by not requiring any new downloads. There is an environment variable called `RUNNER_TOOL_CACHE` on each runner that describes the location of this tools cache and there is where you will find Python and PyPy installed. `setup-python` works by taking a specific version of Python or PyPy in this tools cache and adding it to PATH.
 
-|| Location |
-|------|-------|
-|**Tool Cache Directory** |`RUNNER_TOOL_CACHE`|
-|**Python Tool Cache**|`RUNNER_TOOL_CACHE/Python/*`|
-|**PyPy Tool Cache**|`RUNNER_TOOL_CACHE/PyPy/*`|
+|                          | Location                     |
+| ------------------------ | ---------------------------- |
+| **Tool Cache Directory** | `RUNNER_TOOL_CACHE`          |
+| **Python Tool Cache**    | `RUNNER_TOOL_CACHE/Python/*` |
+| **PyPy Tool Cache**      | `RUNNER_TOOL_CACHE/PyPy/*`   |
 
 GitHub virtual environments are setup in [actions/virtual-environments](https://github.com/actions/virtual-environments). During the setup, the available versions of Python and PyPy are automatically downloaded, setup and documented.
 - [Tools cache setup for Ubuntu](https://github.com/actions/virtual-environments/blob/master/images/linux/scripts/installers/hosted-tool-cache.sh)
@@ -161,6 +161,8 @@ If you would like to use `setup-python` and a self-hosted runner, there are a fe
 - One quick way to grant access is to change the user and group of `/opt/hostedtoolcache` to be the same as the runners using `chown`
     - `sudo chown runner-user:runner-group opt/hostedtoolcache/`
 - If your runner is configured as a service and you run into problems, make sure the user that the service is running as is correct. For more information, you can [check the status of your self-hosted runner](https://help.github.com/en/actions/hosting-your-own-runners/configuring-the-self-hosted-runner-application-as-a-service#checking-the-status-of-the-service).
+- Verify the Linux distribution used is supported by checking https://github.com/actions/virtual-environments#available-environments
+> For Ubuntu and Mac, we compile from source so it is impossible to support all Linux distros and we have no plans to support more.
 
 ### Mac
 
